@@ -5,3 +5,65 @@
 body {
   @apply bg-background;
 }
+
+input:focus-visible {
+  outline: 0;
+}
+
+.cl-footer {
+  background: #1a1a1a;
+}
+
+.cl-footer > :nth-child(2) {
+  display: none;
+}
+
+.cl-card {
+  background: #1f1f1f;
+}
+
+.cl-headerTitle {
+  @apply text-foreground font-inter text-2xl;
+}
+
+.cl-headerSubtitle {
+  @apply text-foreground/60 font-inter;
+}
+
+.cl-socialButtonsBlockButton {
+  @apply bg-foreground hover:bg-foreground/80;
+}
+
+.cl-dividerLine {
+  @apply bg-foreground/60;
+}
+
+.cl-dividerText,
+.cl-formFieldLabel {
+  @apply text-foreground/60 font-inter;
+}
+
+.cl-socialButtonsBlockButtonText {
+  @apply text-background/90 font-inter font-normal;
+}
+
+.cl-formFieldInfoText,
+.cl-footerActionText {
+  @apply text-foreground/60 font-inter font-normal text-xs;
+}
+
+.cl-formFieldInputShowPasswordIcon {
+  @apply h-5 w-5 text-background/60 hover:text-background;
+}
+
+.cl-buttonArrowIcon {
+  display: none;
+}
+
+.cl-formButtonPrimary {
+  @apply font-inter active:bg-[rgb(100,66,168)] py-2 text-foreground hover:bg-primaryHover transition-all font-semibold bg-primary rounded-lg;
+}
+
+.cl-footerActionLink {
+  @apply text-foreground/30 hover:underline font-inter font-normal text-xs;
+}

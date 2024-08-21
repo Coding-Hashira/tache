@@ -1,7 +1,19 @@
+"use client";
+
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "../../components/ui/button";
 import { FaChevronDown } from "react-icons/fa6";
-import { ResourcesHoverCard } from "@/app/(main)/resources-hover-card";
+import { ResourcesHoverCard } from "@/components/ui/resources-hover-card";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+} from "@clerk/nextjs";
+import { Loader } from "lucide-react";
+import Link from "next/link";
 
 type Props = {};
 
@@ -19,7 +31,7 @@ export const Navbar = ({}: Props) => {
           />
           <div className=" flex flex-col">
             <h2 className="font-balooBhai font-semibold text-3xl text-secondary">
-              tâche
+              Tâche
             </h2>
             <p className="font-balooBhai text-sm font-medium text-light">
               by Bramble
@@ -36,8 +48,25 @@ export const Navbar = ({}: Props) => {
           </ResourcesHoverCard>
           <Button variant="ghost">Pricing</Button>
           <div className="h-[22px] w-[0.5px] bg-foreground opacity-30" />
-          <Button variant="ghost">Log in</Button>
-          <Button>Start for free</Button>
+
+          <ClerkLoading>
+            <Loader className="w-6 h-6 animate-spin text-foreground" />
+          </ClerkLoading>
+          <ClerkLoaded>
+            <SignedIn>
+              <Button variant="ghost">
+                <Link href="/dashboard">Continue to app</Link>
+              </Button>
+            </SignedIn>
+            <SignedOut>
+              <Link href="sign-in">
+                <Button variant="ghost">Log in</Button>
+              </Link>
+              <Link href="sign-up">
+                <Button variant="ghost">Start for free</Button>
+              </Link>
+            </SignedOut>
+          </ClerkLoaded>
         </div>
       </div>
     </nav>

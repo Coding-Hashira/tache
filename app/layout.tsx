@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Baloo_Bhai_2, Lilita_One, Inter } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const balooBhai = Baloo_Bhai_2({
   subsets: ["latin"],
@@ -24,11 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${balooBhai.variable} ${lilita.variable} ${inter.variable}`}
-    >
-      <body>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${balooBhai.variable} ${lilita.variable} ${inter.variable}`}
+      >
+        <body>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }

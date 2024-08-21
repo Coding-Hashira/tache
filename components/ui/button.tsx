@@ -6,12 +6,14 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = cva("flex items-center justify-center", {
   variants: {
+    // TODO: Manage variants
     variant: {
       default:
         "font-inter active:bg-[rgb(100,66,168)] text-foreground hover:bg-primaryHover transition-all font-semibold bg-primary rounded-lg",
       ghost:
         "hover:bg-white/10 active:bg-[rgba(255,255,255,0.07)] font-semibold font-inter text-foreground transition-all rounded-lg",
-
+      regular:
+        "transition-all hover:bg-foreground/10 font-medium border-foreground/30 rounded-md font-inter active:bg-foreground/5 border",
       noEffect:
         "font-inter text-foreground font-semibold bg-primary rounded-lg",
     },
@@ -20,6 +22,7 @@ const buttonVariants = cva("flex items-center justify-center", {
       sm: "",
       lg: "px-4 py-3.5",
       icon: "",
+      full: "w-full",
     },
   },
   defaultVariants: {
