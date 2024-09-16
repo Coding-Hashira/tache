@@ -11,17 +11,20 @@ const buttonVariants = cva("flex items-center justify-center", {
       default:
         "font-inter active:bg-[rgb(100,66,168)] text-foreground hover:bg-primaryHover transition-all font-semibold bg-primary rounded-lg",
       ghost:
-        "hover:bg-white/10 active:bg-[rgba(255,255,255,0.07)] font-semibold font-inter text-foreground transition-all rounded-lg",
+        "hover:bg-foreground/10 active:bg-foreground/15 font-semibold font-inter text-foreground transition-all rounded-lg",
       regular:
         "transition-all hover:bg-foreground/10 font-medium border-foreground/30 rounded-md font-inter active:bg-foreground/5 border",
       noEffect:
         "font-inter text-foreground font-semibold bg-primary rounded-lg",
+      icon: "p-1",
+      ghostOutline:
+        "hover:border-foreground/25 active:border-foreground/30 hover:bg-foreground/10 active:bg-foreground/15 font-semibold font-inter text-foreground transition-all rounded-lg border border-foreground/15",
     },
     size: {
       default: "px-4 py-1.5",
-      sm: "",
+      sm: "px-1.5 py-1",
       lg: "px-4 py-3.5",
-      icon: "",
+      icon: "p-1",
       full: "w-full",
     },
   },

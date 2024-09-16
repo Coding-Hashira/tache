@@ -25,6 +25,7 @@ const config = {
         light: "#DACBF8",
         foreground: "#FEFDFC",
         primaryHover: "#6844b1",
+        premium: "#FFC125",
       },
       fontFamily: {
         balooBhai: ["var(--font-balooBhai)"],

@@ -55,7 +55,7 @@ export const Navbar = ({}: Props) => {
           <ClerkLoaded>
             <SignedIn>
               <Button variant="ghost">
-                <Link href="/dashboard">Continue to app</Link>
+                <Link href="/app/">Continue to app</Link>
               </Button>
             </SignedIn>
             <SignedOut>

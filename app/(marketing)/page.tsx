@@ -28,7 +28,7 @@ const Home = () => {
           </ClerkLoading>
           <ClerkLoaded>
             <SignedIn>
-              <Link href="/dashboard">
+              <Link href="/app/">
                 <ElevatedButton>Continue to app</ElevatedButton>
               </Link>
             </SignedIn>

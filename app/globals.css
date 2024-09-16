@@ -10,6 +10,14 @@ input:focus-visible {
   outline: 0;
 }
 
+textarea:focus-visible {
+  outline: 0;
+}
+
+.dialog:focus-visible {
+  outline: 0;
+}
+
 .cl-footer {
   background: #1a1a1a;
 }
