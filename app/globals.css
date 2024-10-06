@@ -75,3 +75,40 @@ textarea:focus-visible {
 .cl-footerActionLink {
   @apply text-foreground/30 hover:underline font-inter font-normal text-xs;
 }
+
+/* Firefox-style scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background-color: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a8a8;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f0f0f0;
+}
+
+/* For Edge */
+@supports (-ms-overflow-style: none) {
+  html {
+    overflow: auto;
+  }
+  body {
+    overflow: overlay;
+  }
+}

@@ -1,7 +1,7 @@
 import { tasks } from "@/db/schema";
 import { create } from "zustand";
 
-export type Task = typeof tasks.$inferSelect;
+export type Task = Omit<typeof tasks.$inferSelect, "userId">;
 
 type TaskStore = {
   tasks: Task[];

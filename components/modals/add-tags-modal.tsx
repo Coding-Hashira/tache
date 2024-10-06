@@ -7,7 +7,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,28 +18,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useKey } from "react-use";
 import { colors } from "@/constants";
-import { useEffect, useState } from "react";
-import IconPicker from "../icon-picker";
-import { useProjectStore } from "@/store/use-projects";
-import { toast } from "sonner";
-import { useAddProjectModal } from "@/store/use-add-project-modal";
+import { useState } from "react";
+import { useAddTagsModal } from "@/store/use-add-tags-modal";
+import { useTagStore } from "@/store/use-tags";
 import { useCallback } from "react";
+import { toast } from "sonner";
 
-export function AddProjectModal() {
-  const [icon, setIcon] = useState(0);
+export function AddTagsModal() {
   const [name, setName] = useState("");
-  const [color, setColor] = useState(1);
-  const { isOpen, close, setLoading } = useAddProjectModal();
-  const { addProject } = useProjectStore();
+  const [color, setColor] = useState(17);
+  const { isOpen, close, setLoading } = useAddTagsModal();
+  const { addTag } = useTagStore();
 
-  const handleAddProject = useCallback(() => {
+  const handleAddTag = useCallback(() => {
     setLoading(true);
-    const projectData = {
+    const tagData = {
       name: name,
       color: colors[color].color,
-      icon: icon,
     };
 
     // Close the modal immediately
@@ -48,42 +43,43 @@ export function AddProjectModal() {
 
     // Reset the form
     setName("");
-    setColor(1);
-    setIcon(0);
+    setColor(17);
 
     // Perform the API call in the background
-    fetch("/api/projects", {
+    fetch("/api/tags", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(projectData),
+      body: JSON.stringify(tagData),
     })
       .then(async (response) => {
         if (response.ok) {
-          const project = await response.json();
-          addProject(project);
-          toast.success("Project added successfully!");
+          const tag = await response.json();
+          addTag(tag);
+
+          // TODO: Add tag to store if needed
+          toast.success("Tag added successfully!");
         } else {
-          throw new Error("Failed to add project");
+          throw new Error("Failed to add tag");
         }
       })
       .catch((error) => {
-        console.error("Error adding project:", error);
-        toast.error("Error adding project!");
+        console.error("Error adding tag:", error);
+        toast.error("Error adding tag!");
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [name, color, icon, close, addProject, setLoading]);
+  }, [name, color, close, setLoading]);
 
   if (!isOpen) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent className="sm:max-w-[425px] top-[36%]">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="border-b pb-2 border-b-foreground/10">
-          <DialogTitle>Add project</DialogTitle>
+          <DialogTitle>Add tag</DialogTitle>
         </DialogHeader>
 
         <div className=" space-y-2">
@@ -101,7 +97,7 @@ export function AddProjectModal() {
             Color
           </Label>
           <Select
-            defaultValue={colors[color]?.color ?? "#d62b6f"}
+            defaultValue={colors[color]?.color ?? "#808080"}
             onValueChange={(value) => {
               setColor(colors.findIndex((color) => color.color === value));
             }}
@@ -126,22 +122,18 @@ export function AddProjectModal() {
             </SelectContent>
           </Select>
         </div>
-        <div className="space-y-2 pb-3 ">
-          <Label className="font-inter font-semibold">Icon</Label>
-          <IconPicker selected={icon} setSelected={setIcon} />
-        </div>
 
-        <DialogFooter>
+        <DialogFooter className="mt-4">
           <Button
             onClick={close}
-            className="text-sm rounded-md font-medium cursor-pointer"
+            className="text-sm rounded-md cursor-pointer font-medium"
             variant="ghost"
           >
             Cancel
           </Button>
           <Button
-            className="text-sm rounded-md font-medium cursor-pointer"
-            onClick={handleAddProject}
+            className="text-sm rounded-md cursor-pointer font-medium"
+            onClick={handleAddTag}
             disabled={!name.trim()}
           >
             Add

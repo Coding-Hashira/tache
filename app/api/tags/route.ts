@@ -1,5 +1,5 @@
 import db from "@/db/drizzle";
-import { tasks } from "@/db/schema";
+import { tags } from "@/db/schema";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
@@ -11,8 +11,8 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const data = await db.query.tasks.findMany({
-    where: eq(tasks.userId, userId),
+  const data = await db.query.tags.findMany({
+    where: eq(tags.userId, userId),
   });
 
   return NextResponse.json(data);
@@ -26,22 +26,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // Convert ISO strings to Date objects
-  const formattedBody = {
-    ...body,
-    dueDate: body.dueDate ? new Date(body.dueDate) : null,
-    createdAt: new Date(body.createdAt),
-    updatedAt: new Date(body.updatedAt),
-    userId,
-  };
-
   try {
-    const data = await db.insert(tasks).values(formattedBody).returning();
+    const data = await db
+      .insert(tags)
+      .values({ ...body, userId })
+      .returning();
     return NextResponse.json(data[0]);
   } catch (error) {
-    console.error("Error inserting task:", error);
+    console.error("Error inserting tag:", error);
     return NextResponse.json(
-      { error: "Failed to insert task" },
+      { error: "Failed to insert tag" },
       { status: 500 }
     );
   }

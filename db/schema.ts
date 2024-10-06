@@ -16,6 +16,7 @@ export const projects = pgTable("projects", {
   color: text("color").notNull().default("#d62b6f"),
   icon: integer("icon").notNull().default(0),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  userId: text("user_id").notNull(),
 });
 
 export const projectsRelations = relations(projects, ({ many }) => ({
@@ -25,8 +26,9 @@ export const projectsRelations = relations(projects, ({ many }) => ({
 export const tags = pgTable("tags", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  color: text("color").notNull().default("#d62b6f"),
+  color: text("color").notNull().default("#808080"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  userId: text("user_id").notNull(),
 });
 
 export const tagsRelations = relations(tags, ({ many }) => ({
@@ -45,6 +47,7 @@ export const tasks = pgTable("tasks", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
   attachments: jsonb("attachments"),
   links: jsonb("links"),
+  userId: text("user_id").notNull(),
 });
 
 export const tasksRelations = relations(tasks, ({ one, many }) => ({
@@ -58,9 +61,14 @@ export const tasksRelations = relations(tasks, ({ one, many }) => ({
 export const tasksTags = pgTable(
   "tasks_tags",
   {
-    taskId: integer("task_id").notNull().references(() => tasks.id),
-    tagId: integer("tag_id").notNull().references(() => tags.id),
+    taskId: integer("task_id")
+      .notNull()
+      .references(() => tasks.id),
+    tagId: integer("tag_id")
+      .notNull()
+      .references(() => tags.id),
     createdAt: timestamp("created_at").defaultNow().notNull(),
+    userId: text("user_id").notNull(),
   },
   (table) => ({
     pk: primaryKey({ columns: [table.taskId, table.tagId] }),

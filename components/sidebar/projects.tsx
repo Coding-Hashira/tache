@@ -42,7 +42,7 @@ const Projects = ({}: Props) => {
     };
 
     fetchProjects();
-  }, [setProjects]);
+  }, [setProjects, setLoading]);
 
   return (
     <div className="flex flex-col items-start justify-center">
@@ -57,7 +57,7 @@ const Projects = ({}: Props) => {
         </ShortcutTooltip>
       </div>
       <div className="flex flex-col h-[17rem] overflow-scroll w-full">
-        {!isLoading ? (
+        {!isLoading && projects && projects?.length > 0 ? (
           projects.map((project) => (
             <ProjectNavButton
               icon={project.icon}

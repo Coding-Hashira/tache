@@ -168,7 +168,10 @@ export const DueDateCombobox = ({
         </Button>
       </div>
       <div className="w-full h-px bg-foreground/20  mt-1" />
-      <Calendar mode="single" />
+      <Calendar
+        mode="single"
+        onSelect={(date: Date | undefined) => date && setDate(date)}
+      />
     </div>
   );
 };

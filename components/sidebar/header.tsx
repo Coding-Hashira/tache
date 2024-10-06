@@ -3,8 +3,8 @@
 import React from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { Bell, ChevronDown, Loader } from "lucide-react";
-import { ClerkLoaded, ClerkLoading, useUser } from "@clerk/nextjs";
+import { Bell, ChevronDown } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 import { Skeleton } from "../ui/skeleton";
 
 type Props = {};
@@ -28,7 +28,7 @@ const Header = ({}: Props) => {
             className="rounded-full"
           />
           <div className="flex items-center justify-center gap-0.5">
-            <h3 className="font-medium text-sm">{user?.firstName || ""}</h3>
+            <h3 className="font-medium text-sm">{user?.firstName || "User"}</h3>
             <ChevronDown className="h-4 w-4" />
           </div>
         </Button>
